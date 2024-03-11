@@ -1,0 +1,31 @@
+// io.on("connection", (socket) => {
+//     console.log("new connection join", socket.id)
+//     socket.on("new-user", (data) => {
+//         users[socket.id] = data
+//         socket.emit("users", users)
+//         socket.broadcast.emit("users", users)
+//     })
+
+//     socket.on("message", async (data) => {
+//         const { sender, reciver } = JSON.parse(data)
+//         const messagesData = await GetUserMessage({ reciverid: reciver, senderid: sender })
+//         socket.emit(`message:${sender}-${reciver}`, messagesData)
+//         socket.broadcast.emit(`message:${sender}-${reciver}`, messagesData)
+//         socket.broadcast.emit(`message:${reciver}-${sender}`, messagesData)
+//     })
+
+//     socket.on('send-message', async (data) => {
+//         const { reciver, sender, message } = JSON.parse(data)
+//         await RegisterMessage({ message, sender, reciver })
+//         const messagesData = await GetUserMessage({ reciverid: reciver, senderid: sender })
+//         socket.emit(`message:${sender}-${reciver}`, messagesData)
+//         socket.broadcast.emit(`message:${sender}-${reciver}`, messagesData)
+//         socket.broadcast.emit(`message:${reciver}-${sender}`, messagesData)
+//     })
+
+//     socket.on('disconnect', () => {
+//         delete users[socket.id]
+//         socket.emit("users", users)
+//         socket.broadcast.emit("users", users)
+//     })
+// })
