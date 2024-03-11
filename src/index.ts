@@ -11,7 +11,6 @@ const server = createServer(app);
 const io = new Server(server, { cors: {} });
 connectTodb()
 const port: number = parseInt(process.env.PORT || "5000", 10);
-const socketServerPort: number = parseInt(process.env.PORT || "7000", 10)
 
 app.use(express.json());
 app.use(cors());
@@ -27,8 +26,7 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Welcome to the chatting server");
 });
 
-io.listen(socketServerPort)
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 

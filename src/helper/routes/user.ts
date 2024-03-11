@@ -1,14 +1,13 @@
-import express from 'express'
-import { CreateUserValidate } from '../validator/user.validate'
-import { RegisterUser } from '../controllers/user.controllers'
+import express from "express";
+import {
+  CreateUserValidate,
+  LoginUserValidate,
+} from "../validator/user.validate";
+import { RegisterUser, loginUser } from "../controllers/user.controllers";
 
-const router = express.Router()
+const router = express.Router();
 
+router.route("/create").post(CreateUserValidate, RegisterUser);
+router.route("/log-in").post(LoginUserValidate, loginUser);
 
-router.route("/create").post(CreateUserValidate, RegisterUser)
-
-
-
-
-
-export default router
+export default router;
