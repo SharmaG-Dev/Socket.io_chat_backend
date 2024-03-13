@@ -4,7 +4,7 @@ import {
   failedResponse,
   successResponse,
 } from "../func/responses.func";
-import { CreateUser } from "../func/users.func";
+import { CreateUser, GetAllUser } from "../func/users.func";
 import UserModel from "../models/user.models";
 import { createHash } from "crypto";
 import { CreateToken } from "../func/token.func";
@@ -47,5 +47,15 @@ export const loginUser = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error("Login error:", error);
     res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const GetUsers = async (req: Request, res: Response) => {
+  try {
+    const response = await GetAllUser();
+    if (response.error) return failedResponse(res, response.message);
+    successResponse(res, response.data);
+  } catch (error: any) {
+    errorResponse(res, error.message);
   }
 };

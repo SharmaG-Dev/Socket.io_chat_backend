@@ -1,53 +1,63 @@
+import mongoose from "mongoose";
+import { model, Schema } from "mongoose";
 
-
-import mongoose from 'mongoose'
-import { model, Schema } from 'mongoose'
-
-
-
-const schema = new Schema({
+const schema = new Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     username: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     mobile: {
-        type: Number,
-        required: true,
-        unique: true
+      type: Number,
+      required: true,
+      unique: true,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     status: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
     groups: {
-        type: []
+      type: [],
     },
     friends: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "users"
-        }
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
+      },
     ],
-    activeHistory: []
-}, {
-    timestamps: true
-})
+    friendRequests: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "friend_requests",
+      },
+    ],
+    sendRequests: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "friend_requests",
+      },
+    ],
+    activeHistory: [],
+  },
+  {
+    timestamps: true,
+  }
+);
 
+const UserModel = model("users", schema);
 
-const UserModel = model('users', schema)
-
-export default UserModel
+export default UserModel;

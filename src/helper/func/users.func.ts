@@ -19,3 +19,12 @@ export const CreateUser = async (formdata: CreateUserProps) => {
     return { error: true, message: error.message };
   }
 };
+
+export const GetAllUser = async () => {
+  try {
+    const response = await UserModel.find({});
+    return { error: false, message: "success", data: response };
+  } catch (error: any) {
+    return { error: true, message: error.message };
+  }
+};
