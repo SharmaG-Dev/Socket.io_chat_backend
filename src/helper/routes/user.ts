@@ -1,13 +1,19 @@
 import express from "express";
-import {
-  CreateUserValidate,
-  LoginUserValidate,
-} from "../validator/user.validate";
-import { RegisterUser, loginUser } from "../controllers/user.controllers";
-
+import { GetSelfuser, GetUsers } from "../controllers/user.controllers";
+import { Authorization } from "../middlewares/authVerify";
 const router = express.Router();
 
-router.route("/create").post(CreateUserValidate, RegisterUser);
-router.route("/log-in").post(LoginUserValidate, loginUser);
+const privateRoute = express.Router()
+const publicRoute = express.Router()
+
+
+privateRoute.use(Authorization)
+
+router.use(privateRoute)
+router.use(publicRoute)
+
+
+privateRoute.route("/get-users").get(GetUsers);
+privateRoute.route("/me").get(GetSelfuser)
 
 export default router;
