@@ -12,11 +12,12 @@ const schema = new Schema(
       required: true,
       unique: true,
     },
-    mobile: {
-      type: Number,
-      required: true,
-      unique: true,
-    },
+    sessions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user_sessions"
+      }
+    ],
     email: {
       type: String,
       required: true,
@@ -25,6 +26,14 @@ const schema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    blockedByAdmin: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
+    blockedReason: {
+      type: String,
     },
     status: {
       type: Boolean,
